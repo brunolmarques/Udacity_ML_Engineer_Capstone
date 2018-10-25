@@ -1,0 +1,1170 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Capstone}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Machine Learning Engineer Capstone
+Project}\label{machine-learning-engineer-capstone-project}
+
+Bruno Marques\\
+October, 2018
+
+\subsubsection{Tasks:}\label{tasks}
+
+Present: 1. A proposed DS approach for the initiative;\\
+2. The findings of the first week (including at least one predictive
+model as prototype);\\
+3. The suggested next steps.
+
+More specifically, build a \textbf{model to predict which employees will
+leave the company.}
+
+\subsubsection{About the data:}\label{about-the-data}
+
+For each of 9 years it show employees that are active and those that
+were terminated.
+
+The datasets contain: employee id; employee record date ( year of data);
+birth date; hire date; termination date; age; length of service; city;
+department; job title; store number; gender; termination reason;
+termination type; status year; status; business unit
+
+    \subsection{STEP 1) Define approach, model goal, expected output and
+features}\label{step-1-define-approach-model-goal-expected-output-and-features}
+
+\textbf{Approach:} Initially an exploratory data analysis will be done
+using all variables from the original dataset, the goal in this stage is
+to identify potential correlations and statistically assess the
+variables. The second stage is to develop a model architecture to
+predict the values of the evaluation dataset;\\
+\textbf{Model goal:} Understand the correlation between features that
+results in emplyees leaving the company (trainning phase) and then
+predict categories for new entries (prediction phase), it will be a
+categorical model;\\
+\textbf{Expected output:} A binary category, Active (0) or MayLeave
+(1);\\
+\textbf{Main features:} Features will be divided into two groups,
+target-feature and main features, as follows:
+
+\begin{verbatim}
+Target Feature: A new column, Employee_Status, will be created using the information from the column terminationdate_key column. The value of 1/1/1900 will be considered as Active (0), while any other value will be considered as Left/MayLeave (1);  
+
+Main features: 
+
+        1. EmployeeID: categorical variable, will be used to identify the observations (index);
+        2. age: numerical discrete variable;
+        3. lenght_of_service: numerical discrete variable;
+        4. city_name: categorical variable;
+        5. department_name: categorical variable;
+        6. store_name: categorical variable encoded as numeric;
+        7. gender_short: categorical variable;
+        8. STATUS_YEAR: ordinal variable encoded as numeric, only the last observations of each EmployeeID wil be used.
+        
+\end{verbatim}
+
+    \subsection{STEP 2) LOAD THE DATA AND CREATE THE TRAINING DATASET AND
+TARGET\_FEATURE}\label{step-2-load-the-data-and-create-the-training-dataset-and-target_feature}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} import statements}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sb}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} import statements}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{externals} \PY{k}{import} \PY{n}{joblib}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{resample}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{Pipeline}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} load the \PYZsq{}csv\PYZsq{} file}
+        \PY{n}{data\PYZus{}filepath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/data\PYZus{}employees.csv}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{data\PYZus{}csv} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{data\PYZus{}filepath}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmployeeID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} visualize the loaded data}
+        \PY{n}{display}\PY{p}{(}\PY{n}{data\PYZus{}csv}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+            Unnamed: 0   recorddate_key birthdate_key orighiredate_key  \
+EmployeeID                                                               
+1318                 1  12/31/2006 0:00      1/3/1954        8/28/1989   
+1318                 2  12/31/2007 0:00      1/3/1954        8/28/1989   
+1318                 3  12/31/2008 0:00      1/3/1954        8/28/1989   
+1318                 4  12/31/2009 0:00      1/3/1954        8/28/1989   
+1318                 5  12/31/2010 0:00      1/3/1954        8/28/1989   
+
+           terminationdate_key  age  length_of_service  city_name  \
+EmployeeID                                                          
+1318                  1/1/1900   52                 17  Vancouver   
+1318                  1/1/1900   53                 18  Vancouver   
+1318                  1/1/1900   54                 19  Vancouver   
+1318                  1/1/1900   55                 20  Vancouver   
+1318                  1/1/1900   56                 21  Vancouver   
+
+           department_name job_title  store_name gender_short gender_full  \
+EmployeeID                                                                  
+1318             Executive       CEO          35            M        Male   
+1318             Executive       CEO          35            M        Male   
+1318             Executive       CEO          35            M        Male   
+1318             Executive       CEO          35            M        Male   
+1318             Executive       CEO          35            M        Male   
+
+           termreason_desc   termtype_desc  STATUS_YEAR  STATUS BUSINESS_UNIT  
+EmployeeID                                                                     
+1318        Not Applicable  Not Applicable         2006  ACTIVE    HEADOFFICE  
+1318        Not Applicable  Not Applicable         2007  ACTIVE    HEADOFFICE  
+1318        Not Applicable  Not Applicable         2008  ACTIVE    HEADOFFICE  
+1318        Not Applicable  Not Applicable         2009  ACTIVE    HEADOFFICE  
+1318        Not Applicable  Not Applicable         2010  ACTIVE    HEADOFFICE  
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} create a function that creates a dataset with the main features only}
+        \PY{c+c1}{\PYZsh{} input: csv file}
+        \PY{c+c1}{\PYZsh{} outpu: csv file with selected columns only}
+        \PY{k}{def} \PY{n+nf}{clean\PYZus{}data}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{:}
+            \PY{n}{main\PYZus{}features}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{department\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{store\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}short}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{STATUS\PYZus{}YEAR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{slim\PYZus{}dataset} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{main\PYZus{}features}\PY{p}{]}
+            \PY{k}{return}\PY{p}{(}\PY{n}{slim\PYZus{}dataset}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} create a function to encode categorical features and remove column STATUS\PYZus{}YEAR}
+        \PY{k}{def} \PY{n+nf}{encode\PYZus{}rm}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{:}
+            \PY{n}{new\PYZus{}file} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{STATUS\PYZus{}YEAR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{le} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+            \PY{n}{new\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{new\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n}{new\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{department\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{new\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{department\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n}{new\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}short}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{new\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}short}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            
+            \PY{k}{return}\PY{p}{(}\PY{n}{new\PYZus{}file}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} create a raw dataset}
+        \PY{n}{raw\PYZus{}data} \PY{o}{=}  \PY{n}{clean\PYZus{}data}\PY{p}{(}\PY{n}{data\PYZus{}csv}\PY{p}{)}
+        \PY{n}{display}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+            age  length_of_service  city_name department_name  store_name  \
+EmployeeID                                                                  
+1318         52                 17  Vancouver       Executive          35   
+1318         53                 18  Vancouver       Executive          35   
+1318         54                 19  Vancouver       Executive          35   
+1318         55                 20  Vancouver       Executive          35   
+1318         56                 21  Vancouver       Executive          35   
+
+           gender_short  STATUS_YEAR  
+EmployeeID                            
+1318                  M         2006  
+1318                  M         2007  
+1318                  M         2008  
+1318                  M         2009  
+1318                  M         2010  
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} filter raw\PYZus{}data so it holds only the last entry of STATUS\PYZus{}YEAR. This approach is based in the hypotesys that }
+        \PY{c+c1}{\PYZsh{} previous years holds little value to predict the chance of leaving the job, normally decisions are made in }
+        \PY{c+c1}{\PYZsh{} the last year}
+        \PY{n}{raw\PYZus{}data\PYZus{}last}\PY{o}{=}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmployeeID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{last}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} raw\PYZus{}data\PYZus{}last will be used to build the models}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{raw\PYZus{}data\PYZus{}last}\PY{o}{.}\PY{n}{shape}\PY{p}{)} \PY{c+c1}{\PYZsh{} compare the dimensionality reduction}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(44692, 7) (6284, 7)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} create the target feature list}
+        \PY{n}{Employee\PYZus{}Status} \PY{o}{=} \PY{n}{data\PYZus{}csv}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{terminationdate\PYZus{}key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        \PY{n}{Employee\PYZus{}Status}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0} \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1/1/1900}\PY{l+s+s1}{\PYZsq{}} \PY{k}{else} \PY{l+m+mi}{1} \PYZbs{}
+                                           \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Employee\PYZus{}Status}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{terminationdate\PYZus{}key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        
+        \PY{n}{employee\PYZus{}Status\PYZus{}last} \PY{o}{=} \PY{n}{Employee\PYZus{}Status}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmployeeID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{last}\PY{p}{(}\PY{p}{)}
+        \PY{n}{target\PYZus{}status} \PY{o}{=} \PY{n}{employee\PYZus{}Status\PYZus{}last}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{terminationdate\PYZus{}key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{display}\PY{p}{(}\PY{n}{target\PYZus{}status}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{target\PYZus{}status}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+            Employee_Status
+EmployeeID                 
+1318                      0
+1319                      0
+1320                      0
+1321                      0
+1322                      0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+(6284, 1)
+
+    \end{Verbatim}
+
+    Now that all three necessary datasets are ready, data\_csv for
+exploratory data analysis (EDA), raw\_data\_last and target\_status to
+train the models, it is possible to begin the EDA.
+
+    \subsection{STEP 3) EXPLORATORY DATA
+ANALYSIS}\label{step-3-exploratory-data-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} sort data by EmployeeID and STATUS\PYZus{}YEAR}
+        \PY{n}{eda\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}csv}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{eda\PYZus{}data}\PY{o}{=}\PY{n}{eda\PYZus{}data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmployeeID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{last}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} once again using only last year data of each employee}
+        \PY{n}{eda\PYZus{}data}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{eda\PYZus{}data}\PY{p}{,} \PY{n}{target\PYZus{}status}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} concatenated target\PYZus{}status to use as an easier reference}
+        \PY{n}{eda\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{display}\PY{p}{(}\PY{n}{eda\PYZus{}data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{eda\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+             recorddate_key birthdate_key orighiredate_key  \
+EmployeeID                                                   
+1318        12/31/2014 0:00      1/3/1954        8/28/1989   
+1319        12/31/2014 0:00      1/3/1957        8/28/1989   
+1320        12/31/2014 0:00      1/2/1955        8/28/1989   
+1321        12/31/2014 0:00      1/2/1959        8/28/1989   
+1322        12/31/2014 0:00      1/9/1958        8/31/1989   
+
+           terminationdate_key  age  length_of_service  city_name  \
+EmployeeID                                                          
+1318                  1/1/1900   60                 25  Vancouver   
+1319                  1/1/1900   57                 25  Vancouver   
+1320                  1/1/1900   59                 25  Vancouver   
+1321                  1/1/1900   55                 25  Vancouver   
+1322                  1/1/1900   56                 25  Vancouver   
+
+           department_name           job_title  store_name gender_short  \
+EmployeeID                                                                
+1318             Executive                 CEO          35            M   
+1319             Executive           VP Stores          35            F   
+1320             Executive       Legal Counsel          35            F   
+1321             Executive  VP Human Resources          35            M   
+1322             Executive          VP Finance          35            M   
+
+           gender_full termreason_desc   termtype_desc  STATUS_YEAR  STATUS  \
+EmployeeID                                                                    
+1318              Male  Not Applicable  Not Applicable         2014  ACTIVE   
+1319            Female  Not Applicable  Not Applicable         2014  ACTIVE   
+1320            Female  Not Applicable  Not Applicable         2014  ACTIVE   
+1321              Male  Not Applicable  Not Applicable         2014  ACTIVE   
+1322              Male  Not Applicable  Not Applicable         2014  ACTIVE   
+
+           BUSINESS_UNIT  Employee_Status  
+EmployeeID                                 
+1318          HEADOFFICE                0  
+1319          HEADOFFICE                0  
+1320          HEADOFFICE                0  
+1321          HEADOFFICE                0  
+1322          HEADOFFICE                0  
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+(6284, 18)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} create a dataframe only with cases of employess who left}
+         \PY{n}{left\PYZus{}eda\PYZus{}data}\PY{o}{=}\PY{n}{eda\PYZus{}data}\PY{p}{[}\PY{n}{eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{left\PYZus{}eda\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} compare the quantities of employees who left and those who stayed}
+         \PY{n}{left} \PY{o}{=} \PY{n}{left\PYZus{}eda\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{percent\PYZus{}left} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{*} \PY{n}{left} \PY{o}{/} \PY{n}{eda\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{remain} \PY{o}{=} \PY{n}{eda\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{total} \PY{o}{=} \PY{n}{eda\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{women\PYZus{}left} \PY{o}{=} \PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{percent\PYZus{}women} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{*} \PY{n}{women\PYZus{}left} \PY{o}{/} \PY{n}{left}
+         \PY{n}{men\PYZus{}left} \PY{o}{=} \PY{n}{left\PYZus{}eda\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{women\PYZus{}left}
+         \PY{n}{percent\PYZus{}men} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{*} \PY{n}{men\PYZus{}left}\PY{o}{/} \PY{n}{left}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Of a total of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ employees }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ decided to leave the company, represening a turnover of }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PYZbs{}
+                                                                                 \PY{n}{total}\PY{p}{,} \PY{n}{left}\PY{p}{,} \PY{n}{percent\PYZus{}left}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Of the }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ employees who left }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ (}\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{) were women and }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ (}\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{) were men.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PYZbs{}
+                                                                     \PY{n}{women\PYZus{}left}\PY{p}{,} \PY{n}{percent\PYZus{}women}\PY{p}{,} \PY{n}{men\PYZus{}left}\PY{p}{,} \PY{n}{percent\PYZus{}men}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Of a total of 6284 employees 1485 decided to leave the company, represening a turnover of 23.63\%.
+Of the 1485 employees who left 915 (61.62\%) were women and 570 (38.38\%) were men.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 1485 entries, 1338 to 8321
+Data columns (total 17 columns):
+recorddate\_key         1485 non-null object
+birthdate\_key          1485 non-null object
+orighiredate\_key       1485 non-null object
+terminationdate\_key    1485 non-null object
+age                    1485 non-null int64
+length\_of\_service      1485 non-null int64
+city\_name              1485 non-null object
+department\_name        1485 non-null object
+job\_title              1485 non-null object
+store\_name             1485 non-null int64
+gender\_short           1485 non-null object
+gender\_full            1485 non-null object
+termreason\_desc        1485 non-null object
+termtype\_desc          1485 non-null object
+STATUS\_YEAR            1485 non-null int64
+STATUS                 1485 non-null object
+BUSINESS\_UNIT          1485 non-null object
+dtypes: int64(4), object(13)
+memory usage: 208.8+ KB
+None
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Boxplots of \PYZsq{}age\PYZsq{} and \PYZsq{}length\PYZus{}of\PYZus{}service\PYZsq{} (the only two numerical fetures)}
+         \PY{n}{f}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gender\PYZus{}full}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                       \PY{n}{data}\PY{o}{=}\PY{n}{eda\PYZus{}data}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{notch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Active}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{fontdict}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{minor}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{;}
+         
+         \PY{n}{ax1}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{length\PYZus{}of\PYZus{}service}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gender\PYZus{}full}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                        \PY{n}{data}\PY{o}{=}\PY{n}{eda\PYZus{}data}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{notch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Active}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{fontdict}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{minor}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} statistial analysis of age and length of service}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{All cases:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Female who left:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Male who left:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+All cases:
+                age  length\_of\_service
+count  1485.000000        1485.000000
+mean     51.349495          11.277441
+std      16.525395           6.660707
+min      19.000000           0.000000
+25\%      34.000000           7.000000
+50\%      60.000000          13.000000
+75\%      65.000000          13.000000
+max      65.000000          25.000000
+
+Female who left:
+               age  length\_of\_service
+count  915.000000         915.000000
+mean    53.779235          12.336612
+std     16.521434           6.446915
+min     19.000000           0.000000
+25\%     36.500000           8.500000
+50\%     65.000000          13.000000
+75\%     65.000000          13.000000
+max     65.000000          25.000000
+
+Male who left:
+               age  length\_of\_service
+count  570.000000         570.000000
+mean    47.449123           9.577193
+std     15.781183           6.651652
+min     19.000000           0.000000
+25\%     30.000000           5.000000
+50\%     60.000000           8.000000
+75\%     60.000000          17.000000
+max     64.000000          24.000000
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Countplot \PYZhy{} \PYZsq{}age\PYZsq{}}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{,} \PYZbs{}
+                        \PY{n}{order}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Countplot \PYZhy{} \PYZsq{}length\PYZus{}of\PYZus{}service\PYZsq{}}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{,} \PYZbs{}
+                        \PY{n}{order}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Countplot \PYZhy{} \PYZsq{}city\PYZus{}name\PYZsq{}}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{,} \PYZbs{}
+                        \PY{n}{order}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{ax1}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Countplot \PYZhy{} \PYZsq{}department\PYZus{}name\PYZsq{}}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{department\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{,} \PYZbs{}
+                        \PY{n}{order}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{department\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{ax1}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Countplot \PYZhy{} \PYZsq{}store\PYZus{}name\PYZsq{}}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{store\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{,} \PYZbs{}
+                        \PY{n}{order}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{store\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{ax1}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Countplot \PYZhy{} \PYZsq{}termreason\PYZus{}desc\PYZsq{}}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{termreason\PYZus{}desc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{,} \PYZbs{}
+                        \PY{n}{order}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{termreason\PYZus{}desc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{ax1}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Countplot \PYZhy{} \PYZsq{}termtype\PYZus{}desc\PYZsq{}}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{termtype\PYZus{}desc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{,} \PYZbs{}
+                        \PY{n}{order}\PY{o}{=}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{termtype\PYZus{}desc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{ax1}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{encoded\PYZus{}left}\PY{o}{=}\PY{n}{encode\PYZus{}rm}\PY{p}{(}\PY{n}{left\PYZus{}eda\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} scatterplot between numerical features}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ticks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n}{sb}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{encoded\PYZus{}left}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{department\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                                                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{store\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/bruno/anaconda3/envs/py3\_tensorflow/lib/python3.5/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} heatmap to assess correlation between numerical features}
+         \PY{n}{sb}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{encoded\PYZus{}left}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length\PYZus{}of\PYZus{}service}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{department\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                                                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{store\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender\PYZus{}full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                    \PY{n}{cmap} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Blues}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.2f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Observations of the Exploratory Data
+Analysis}\label{observations-of-the-exploratory-data-analysis}
+
+Of a total of 6284 employees 1485 decided to leave the company,
+represening a turnover of 23.63\%. Of the 1485 employees who left 915
+(61.62\%) were women and 570 (38.38\%) were men.
+
+\textbf{About the data:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  the oldest employees whom leave the company are no more than 65 years
+  old and have no more than 25 years in service;\\
+\item
+  women tend to leave at older ages than men, 65 against 60 years old
+  respectively, and the range of 60-65 is the one with most occurrencies
+  of employee's turnover;\\
+\item
+  women with 13 years of service have a really high rate of leaving,
+  with men there is a considerable amount at 8 years of service;\\
+\item
+  Vancouver and Victoria are the two cities with more turnover, being
+  Vancouver with the highest women turnover;\\
+\item
+  department areas of meats, produce, customer service and diary holds
+  the higher rates of employees leaving, beeing meats the greatest one
+  specially for women;\\
+\item
+  store 35 holds the higher rates of employees leaving, also for women
+  is the higher rate store;\\
+\item
+  retirement is the main reason for leaving, beeing the main motive to
+  most women and men;\\
+\item
+  pratically all turnover is voluntary;\\
+\item
+  there is a positive linear relation between age and
+  length\_of\_service, this means that for a model one of the two could
+  be discarded as the other would carry the same information, the same
+  applies to city and store;\\
+\item
+  lastly, the heatmap shows the strenght of the age and
+  length\_of\_service, city and store pairs relation indeed are strong
+  (values above 0.7).
+\end{enumerate}
+
+    \subsubsection{STEP 4) BUILD MODEL
+ARCHITECTURE}\label{step-4-build-model-architecture}
+
+Based on the data structure and feature's types the following model was
+chosen to be tested:
+
+\begin{verbatim}
+- Logistic Regression: this is a simple model based on a linear equation, it separates the outputs with a single line, each side of the line represent a category. Besides it’s name, Logistic Regression, is model often used in classification problems;  
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{target\PYZus{}status}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{target\PYZus{}status}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Employee\_Status    1485
+dtype: int64
+(6284, 1)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} before start with the models prepare the trainning data as the quantity of cases leaving the company are not}
+         \PY{c+c1}{\PYZsh{} balanced with the cases that remained}
+         \PY{n}{raw\PYZus{}data\PYZus{}last}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{target\PYZus{}status}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{raw\PYZus{}data\PYZus{}last} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{raw\PYZus{}data\PYZus{}last}\PY{p}{,} \PY{n}{target\PYZus{}status}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{df\PYZus{}majority} \PY{o}{=} \PY{n}{raw\PYZus{}data\PYZus{}last}\PY{p}{[}\PY{n}{raw\PYZus{}data\PYZus{}last}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{df\PYZus{}minority} \PY{o}{=} \PY{n}{raw\PYZus{}data\PYZus{}last}\PY{p}{[}\PY{n}{raw\PYZus{}data\PYZus{}last}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df\PYZus{}majority}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{df\PYZus{}minority}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(4799, 8) (1485, 8)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} balance data}
+         \PY{n}{df\PYZus{}minority\PYZus{}balaced} \PY{o}{=} \PY{n}{resample}\PY{p}{(}\PY{n}{df\PYZus{}minority}\PY{p}{,} 
+                                     \PY{n}{replace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}    
+                                     \PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{n}{df\PYZus{}majority}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}    
+                                     \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)} 
+          
+         \PY{c+c1}{\PYZsh{} combine both dataframes}
+         \PY{n}{train\PYZus{}balaced} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df\PYZus{}majority}\PY{p}{,} \PY{n}{df\PYZus{}minority\PYZus{}balaced}\PY{p}{]}\PY{p}{)}
+          
+         \PY{c+c1}{\PYZsh{} count new values}
+         \PY{n}{train\PYZus{}balaced}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 1    4799
+         0    4799
+         Name: Employee\_Status, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} separate the target feature from the dataframe}
+         \PY{n}{target\PYZus{}status\PYZus{}balanced} \PY{o}{=} \PY{n}{train\PYZus{}balaced}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{r}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{n}{target\PYZus{}status\PYZus{}balanced}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{target\PYZus{}status\PYZus{}balanced} \PY{o}{=} \PY{n}{target\PYZus{}status\PYZus{}balanced}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{r}\PY{p}{,}\PY{p}{)}
+         \PY{n}{train\PYZus{}balaced}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{target\PYZus{}status\PYZus{}balanced}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{train\PYZus{}balaced}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(9598,) (9598, 7)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{display}\PY{p}{(}\PY{n}{train\PYZus{}balaced}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+            age  length_of_service  city_name department_name  store_name  \
+EmployeeID                                                                  
+1318         60                 25  Vancouver       Executive          35   
+1319         57                 25  Vancouver       Executive          35   
+1320         59                 25  Vancouver       Executive          35   
+1321         55                 25  Vancouver       Executive          35   
+1322         56                 25  Vancouver       Executive          35   
+
+           gender_short  STATUS_YEAR  
+EmployeeID                            
+1318                  M         2014  
+1319                  F         2014  
+1320                  F         2014  
+1321                  M         2014  
+1322                  M         2014  
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{train\PYZus{}encoded} \PY{o}{=} \PY{n}{encode\PYZus{}rm}\PY{p}{(}\PY{n}{train\PYZus{}balaced}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} divide the data into train and test}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{train\PYZus{}encoded}\PY{o}{.}\PY{n}{values}\PY{p}{,}\PYZbs{}
+                                                             \PY{n}{target\PYZus{}status\PYZus{}balanced}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(7198, 6)
+(7198,)
+(2400, 6)
+(2400,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} test the different models and assess which one has the best score}
+         \PY{n}{pipeline} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{pipeline}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lbfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{model} \PY{o+ow}{in} \PY{n}{pipeline}\PY{p}{:}
+             \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+             \PY{n}{cv\PYZus{}results\PYZus{}train} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}results\PYZus{}train}\PY{p}{)}
+             \PY{n}{names}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+             \PY{n}{msg1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train result of model }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{: mean accuracy \PYZhy{} }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ (std: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PYZbs{}
+             \PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{cv\PYZus{}results\PYZus{}train}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{cv\PYZus{}results\PYZus{}train}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg1}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train result of model LR: mean accuracy - 0.848430 (std: 0.010633)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} perform a gridsearch to find the best parameters}
+         \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{penalty}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PYZbs{}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.03}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{]}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{solver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lbfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{liblinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saga}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PYZbs{}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}iter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{3000}\PY{p}{,} \PY{l+m+mi}{4000}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+         \PY{n}{grid} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{model}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{params}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{grid\PYZus{}result} \PY{o}{=} \PY{n}{grid}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{means} \PY{o}{=} \PY{n}{grid\PYZus{}result}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}test\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{stds} \PY{o}{=} \PY{n}{grid\PYZus{}result}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std\PYZus{}test\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{params} \PY{o}{=} \PY{n}{grid\PYZus{}result}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{params}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{mean}\PY{p}{,} \PY{n}{stdev}\PY{p}{,} \PY{n}{param} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{means}\PY{p}{,} \PY{n}{stds}\PY{p}{,} \PY{n}{params}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ (}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{) with: }\PY{l+s+si}{\PYZpc{}r}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{mean}\PY{p}{,} \PY{n}{stdev}\PY{p}{,} \PY{n}{param}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ using }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{grid\PYZus{}result}\PY{o}{.}\PY{n}{best\PYZus{}score\PYZus{}}\PY{p}{,} \PY{n}{grid\PYZus{}result}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 10 folds for each of 18 candidates, totalling 180 fits
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+[Parallel(n\_jobs=1)]: Done 180 out of 180 | elapsed:  2.9min finished
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.851625 (0.010949) with: \{'penalty': 'l2', 'solver': 'lbfgs', 'max\_iter': 3000, 'C': 0.01\}
+0.732981 (0.023753) with: \{'penalty': 'l2', 'solver': 'liblinear', 'max\_iter': 3000, 'C': 0.01\}
+0.849819 (0.012247) with: \{'penalty': 'l2', 'solver': 'saga', 'max\_iter': 3000, 'C': 0.01\}
+0.851625 (0.010949) with: \{'penalty': 'l2', 'solver': 'lbfgs', 'max\_iter': 4000, 'C': 0.01\}
+0.732981 (0.023753) with: \{'penalty': 'l2', 'solver': 'liblinear', 'max\_iter': 4000, 'C': 0.01\}
+0.849819 (0.012247) with: \{'penalty': 'l2', 'solver': 'saga', 'max\_iter': 4000, 'C': 0.01\}
+0.851625 (0.012096) with: \{'penalty': 'l2', 'solver': 'lbfgs', 'max\_iter': 3000, 'C': 0.03\}
+0.778550 (0.017176) with: \{'penalty': 'l2', 'solver': 'liblinear', 'max\_iter': 3000, 'C': 0.03\}
+0.853293 (0.011391) with: \{'penalty': 'l2', 'solver': 'saga', 'max\_iter': 3000, 'C': 0.03\}
+0.851625 (0.012096) with: \{'penalty': 'l2', 'solver': 'lbfgs', 'max\_iter': 4000, 'C': 0.03\}
+0.778550 (0.017176) with: \{'penalty': 'l2', 'solver': 'liblinear', 'max\_iter': 4000, 'C': 0.03\}
+0.853293 (0.011391) with: \{'penalty': 'l2', 'solver': 'saga', 'max\_iter': 4000, 'C': 0.03\}
+0.850792 (0.011619) with: \{'penalty': 'l2', 'solver': 'lbfgs', 'max\_iter': 3000, 'C': 0.05\}
+0.798833 (0.018640) with: \{'penalty': 'l2', 'solver': 'liblinear', 'max\_iter': 3000, 'C': 0.05\}
+0.852598 (0.011530) with: \{'penalty': 'l2', 'solver': 'saga', 'max\_iter': 3000, 'C': 0.05\}
+0.850792 (0.011619) with: \{'penalty': 'l2', 'solver': 'lbfgs', 'max\_iter': 4000, 'C': 0.05\}
+0.798833 (0.018640) with: \{'penalty': 'l2', 'solver': 'liblinear', 'max\_iter': 4000, 'C': 0.05\}
+0.852459 (0.011485) with: \{'penalty': 'l2', 'solver': 'saga', 'max\_iter': 4000, 'C': 0.05\}
+Best: 0.853293 using \{'penalty': 'l2', 'solver': 'saga', 'max\_iter': 3000, 'C': 0.03\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{model} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.03}\PY{p}{,} \PY{n}{max\PYZus{}iter}\PY{o}{=} \PY{l+m+mi}{3000}\PY{p}{,} \PY{n}{solver}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saga}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{predictions} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}\PY{p}{)}                               
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.86375
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{compare} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{predictions}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Data}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{y\PYZus{}test}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{compare}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+    Prediction  Test Data
+0            1          1
+1            1          1
+2            0          1
+3            1          1
+4            0          0
+5            0          0
+6            1          1
+7            0          0
+8            1          1
+9            1          1
+10           0          0
+11           1          1
+12           0          0
+13           0          0
+14           0          0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} load the \PYZsq{}eval\PYZus{}set.csv\PYZsq{} file}
+         \PY{n}{eval\PYZus{}filepath} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/eval\PYZus{}set.csv}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{eval\PYZus{}csv} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{eval\PYZus{}filepath}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EmployeeID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{eval\PYZus{}set} \PY{o}{=} \PY{n}{clean\PYZus{}data}\PY{p}{(}\PY{n}{eval\PYZus{}csv}\PY{p}{)}
+         \PY{n}{eval\PYZus{}set} \PY{o}{=} \PY{n}{encode\PYZus{}rm}\PY{p}{(}\PY{n}{eval\PYZus{}set}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} visualize the loaded data}
+         \PY{n}{display}\PY{p}{(}\PY{n}{eval\PYZus{}set}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+            age  length_of_service  city_name  department_name  store_name  \
+EmployeeID                                                                   
+1318         61                 26         26                8          35   
+1319         58                 26         26                8          35   
+1320         60                 26         26                8          35   
+1321         56                 26         26                8          35   
+1322         57                 26         26                8          35   
+
+            gender_short  
+EmployeeID                
+1318                   1  
+1319                   0  
+1320                   0  
+1321                   1  
+1322                   1  
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} predict values of eval\PYZus{}set}
+         \PY{n}{eval\PYZus{}predictions} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{eval\PYZus{}set}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} create a dataframe with the indexes and predictions}
+         \PY{n}{model\PYZus{}prediction} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{eval\PYZus{}predictions}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{eval\PYZus{}set}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employee\PYZus{}May\PYZus{}Left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} salve the dataframe as csv}
+         \PY{n}{model\PYZus{}prediction}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}prediction.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
